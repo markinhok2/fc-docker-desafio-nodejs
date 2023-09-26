@@ -15,12 +15,14 @@ services:
     networks: 
       - server-network
   nodeapp:
-    build: 
+    build:
       context: nodejs
     container_name: nodeapp
-    entrypoint: wait-for mysql:3306 -t 40 -- node index.js
+    entrypoint: ./start.sh
     networks: 
       - server-network
+    volumes: 
+      - ./nodejs/src:/usr/src/app
     tty: true
     depends_on: 
        - mysql
